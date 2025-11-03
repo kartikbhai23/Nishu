@@ -165,6 +165,16 @@
             border-bottom: 2px solid #667eea;
         }
 
+        /* Section title icons */
+        .section-title .section-icon {
+            width: 26px;
+            height: 26px;
+            color: #a78bfa;
+            margin-right: 0.6rem;
+            vertical-align: middle;
+            fill: currentColor;
+        }
+
         .resume-item {
             margin-bottom: 2rem;
             padding: 1.5rem;
@@ -211,6 +221,8 @@
             border-color: #a78bfa;
         }
 
+        /* --- OLD TECH SKILLS STYLE --- */
+        /*
         .tech-skills {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -231,6 +243,61 @@
             background: rgba(102, 126, 234, 0.3);
             transform: scale(1.05);
         }
+        */
+
+        /* --- NEW STRUCTURED SKILLS STYLES --- */
+        .skills-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .skill-category-card {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid #764ba2;
+            border-radius: 15px;
+            padding: 2rem;
+            min-height: 200px;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .skill-category-card:hover {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #c4b5fd; /* Light purple for category titles */
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            width: 24px;
+            height: 24px;
+            color: #667eea; /* Blue accent color for icons */
+            margin-right: 10px;
+        }
+
+        .skill-tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(102, 126, 234, 0.25);
+            color: #fff;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #667eea;
+        }
+
 
         /* Projects Page */
         .filter-buttons {
@@ -269,6 +336,16 @@
             padding: 2rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.03);
+            background: rgba(0,0,0,0.1);
         }
 
         .project-card:hover {
@@ -316,6 +393,62 @@
 
         .project-link:hover {
             color: #a78bfa;
+        }
+
+        /* Certificate Grid Style */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .certificate-card {
+            background: rgba(30, 30, 60, 0.8);
+            border: 2px solid #a78bfa;
+            border-radius: 10px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .certificate-badge-icon {
+            width: 40px;
+            height: 40px;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .certificate-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #c4b5fd;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-issuer {
+            color: #a78bfa;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .certificate-date {
+            background: rgba(102, 126, 234, 0.1);
+            color: #e0e7ff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         /* Contact Page */
@@ -461,8 +594,13 @@
                 grid-template-columns: 1fr;
             }
 
-            .projects-grid {
+            .projects-grid,
+            .certificates-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .skills-grid-container {
+                grid-template-columns: 1fr; /* Stack cards vertically on mobile */
             }
 
             .skills-grid {
@@ -476,10 +614,26 @@
             color: #a78bfa;
             font-size: 1.2rem;
         }
+
+        /* Footer Styles */
+        footer {
+            background: rgba(30, 30, 60, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid #667eea;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 1rem;
+            color: #e0e7ff;
+            font-size: 0.9rem;
+        }
+
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <div class="logo">Nishu Tiwari</div>
@@ -492,9 +646,7 @@
         </div>
     </nav>
 
-    <!-- Main Container -->
     <div class="container">
-        <!-- About Page -->
         <div id="about" class="page active">
             <div class="hero">
                 <h1>Hi, I'm Nishu Tiwari 👋</h1>
@@ -505,7 +657,7 @@
                 <h2 class="section-title">About Me</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>I'm a passionate computer science student specializing in Artificial Intelligence and Machine Learning, currently in my 3rd year at Quantum University, Roorkee. I love building innovative projects and exploring the endless possibilities of technology.</p>
+                        <p>I'm a passionate computer science student specializing in **Artificial Intelligence and Machine Learning**, currently in my 3rd year at Quantum University, Roorkee. I love building innovative projects and exploring the endless possibilities of technology.</p>
                         <br>
                         <p>With a strong foundation in programming and problem-solving, I'm constantly learning and growing in the field of AI/ML. I enjoy tackling complex challenges and turning ideas into reality through code.</p>
                         <br>
@@ -534,27 +686,79 @@
 
             <div class="resume-section">
                 <h2 class="section-title">Skills & Expertise</h2>
-                <div class="tech-skills">
-                    <div class="tech-skill">Python</div>
-                    <div class="tech-skill">JavaScript</div>
-                    <div class="tech-skill">Machine Learning</div>
-                    <div class="tech-skill">Deep Learning</div>
-                    <div class="tech-skill">React</div>
-                    <div class="tech-skill">Data Science</div>
-                    <div class="tech-skill">TensorFlow</div>
-                    <div class="tech-skill">Git & GitHub</div>
-                    <div class="tech-skill">SQL</div>
-                    <div class="tech-skill">Problem Solving</div>
-                    <div class="tech-skill">Algorithms</div>
-                    <div class="tech-skill">Data Structures</div>
+                <div class="skills-grid-container">
+                    
+                    <div class="skill-category-card">
+                        <h3 class="category-header">
+                            <svg class="category-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14.6 16.6l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4zM9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4z"/>
+                            </svg>
+                            Programming
+                        </h3>
+                        <div class="skill-tag-container">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Java</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <h3 class="category-header">
+                            <svg class="category-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.86-7-7.93 0-.62.08-1.21.22-1.79L15.3 18.8c-.8.67-1.81 1.05-2.85 1.13zm5.32-2.88l-12.82-5.73c.09-.54.29-1.05.57-1.52l12.82 5.73c-.2.43-.45.83-.73 1.19zM20 12c0-2.07-.81-3.98-2.14-5.39l-11.41 5.12c.31.52.54 1.1.66 1.7L18.86 6.61C19.52 7.73 20 9.28 20 12z"/>
+                            </svg>
+                            ML/DL Frameworks
+                        </h3>
+                        <div class="skill-tag-container">
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">NumPy</span>
+                            <span class="skill-tag">Pandas</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <h3 class="category-header">
+                            <svg class="category-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16 4h-2V2h-4v2H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H8V6h8v14zm-2-7h-4V8h4v5z"/>
+                            </svg>
+                            Tools & Technologies
+                        </h3>
+                        <div class="skill-tag-container">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">UV</span>
+                            <span class="skill-tag">FastAPI</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">VS Code</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <h3 class="category-header">
+                            <svg class="category-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 11.55c-1.28.37-2.73.57-4.22.57-3.64 0-6.84-1.7-8.87-4.32l.74-.53c1.88 2.44 4.85 3.99 8.13 3.99 1.48 0 2.9-.22 4.22-.57L12 11.55zm0 2.1c-1.28-.37-2.73-.57-4.22-.57-3.64 0-6.84 1.7-8.87 4.32l.74.53c1.88-2.44 4.85-3.99 8.13-3.99 1.48 0 2.9.22 4.22.57L12 13.65zm12-5.7c-1.88-2.44-4.85-3.99-8.13-3.99-1.48 0-2.9.22-4.22.57L12 8.45c1.28-.37 2.73-.57 4.22-.57 3.64 0 6.84 1.7 8.87 4.32l-.74.53z"/>
+                            </svg>
+                            AI/ML Domains
+                        </h3>
+                        <div class="skill-tag-container">
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Generative AI</span>
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">Data Science</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- Resume Page -->
         <div id="resume" class="page">
             <div class="resume-section">
-                <h2 class="section-title">Education</h2>
+                <h2 class="section-title">🎓 Education</h2>
                 <div class="resume-item">
                     <h3>Bachelor of Technology - CSE (AI/ML)</h3>
                     <div class="date">2023 - 2027 (Currently in 3rd Year)</div>
@@ -576,7 +780,7 @@
             </div>
 
             <div class="resume-section">
-                <h2 class="section-title">Work Experience</h2>
+                <h2 class="section-title">💼 Work Experience</h2>
                 <div class="resume-item">
                     <h3>AI/ML Intern</h3>
                     <div class="date">Upcoming</div>
@@ -590,45 +794,109 @@
             </div>
 
             <div class="resume-section">
-                <h2 class="section-title">Technical Skills</h2>
-                <div class="tech-skills">
-                    <div class="tech-skill">Python</div>
-                    <div class="tech-skill">JavaScript</div>
-                    <div class="tech-skill">Java</div>
-                    <div class="tech-skill">C++</div>
-                    <div class="tech-skill">Machine Learning</div>
-                    <div class="tech-skill">Deep Learning</div>
-                    <div class="tech-skill">TensorFlow</div>
-                    <div class="tech-skill">PyTorch</div>
-                    <div class="tech-skill">React.js</div>
-                    <div class="tech-skill">Node.js</div>
-                    <div class="tech-skill">SQL</div>
-                    <div class="tech-skill">MongoDB</div>
-                    <div class="tech-skill">Git & GitHub</div>
-                    <div class="tech-skill">Data Analysis</div>
-                    <div class="tech-skill">NumPy & Pandas</div>
-                    <div class="tech-skill">Scikit-learn</div>
+                <h2 class="section-title"> 🛠️ Technical Skills</h2>
+                <div class="skills-grid-container">
+                    
+                    <div class="skill-category-card">
+                        <h3 class="category-header">
+                            <svg class="category-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14.6 16.6l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4zM9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4z"/>
+                            </svg>
+                            Programming
+                        </h3>
+                        <div class="skill-tag-container">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Java</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <h3 class="category-header">
+                            <svg class="category-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.86-7-7.93 0-.62.08-1.21.22-1.79L15.3 18.8c-.8.67-1.81 1.05-2.85 1.13zm5.32-2.88l-12.82-5.73c.09-.54.29-1.05.57-1.52l12.82 5.73c-.2.43-.45.83-.73 1.19zM20 12c0-2.07-.81-3.98-2.14-5.39l-11.41 5.12c.31.52.54 1.1.66 1.7L18.86 6.61C19.52 7.73 20 9.28 20 12z"/>
+                            </svg>
+                            ML/DL Frameworks
+                        </h3>
+                        <div class="skill-tag-container">
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">NumPy</span>
+                            <span class="skill-tag">Pandas</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <h3 class="category-header">
+                            <svg class="category-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16 4h-2V2h-4v2H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H8V6h8v14zm-2-7h-4V8h4v5z"/>
+                            </svg>
+                            Tools & Technologies
+                        </h3>
+                        <div class="skill-tag-container">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">UV</span>
+                            <span class="skill-tag">FastAPI</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">VS Code</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <h3 class="category-header">
+                            <svg class="category-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 11.55c-1.28.37-2.73.57-4.22.57-3.64 0-6.84-1.7-8.87-4.32l.74-.53c1.88 2.44 4.85 3.99 8.13 3.99 1.48 0 2.9-.22 4.22-.57L12 11.55zm0 2.1c-1.28-.37-2.73-.57-4.22-.57-3.64 0-6.84 1.7-8.87 4.32l.74.53c1.88-2.44 4.85-3.99 8.13-3.99 1.48 0 2.9.22 4.22.57L12 13.65zm12-5.7c-1.88-2.44-4.85-3.99-8.13-3.99-1.48 0-2.9.22-4.22.57L12 8.45c1.28-.37 2.73-.57 4.22-.57 3.64 0 6.84 1.7 8.87 4.32l-.74.53z"/>
+                            </svg>
+                            AI/ML Domains
+                        </h3>
+                        <div class="skill-tag-container">
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Generative AI</span>
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">Data Science</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="resume-section">
+                <h2 class="section-title">🏆 Certifications</h2>
+                <div class="certificates-grid">
+
+                    <div class="certificate-card">
+                        <svg class="certificate-badge-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm0 7c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm0-18c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zM12 21c-4.962 0-9-4.038-9-9s4.038-9 9-9 9 4.038 9 9-4.038 9-9 9z"/>
+                        </svg>
+                        <h3 class="certificate-title">Deep Learning Specialization</h3>
+                        <p class="certificate-issuer">DeepLearning.AI - Coursera</p>
+                        <div class="certificate-date">2024</div>
+                    </div>
+
+                    <div class="certificate-card">
+                        <svg class="certificate-badge-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm0 7c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm0-18c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zM12 21c-4.962 0-9-4.038-9-9s4.038-9 9-9 9 4.038 9 9-4.038 9-9 9z"/>
+                        </svg>
+                        <h3 class="certificate-title">MLOps Specialization</h3>
+                        <p class="certificate-issuer">DeepLearning.AI - Coursera</p>
+                        <div class="certificate-date">2023</div>
+                    </div>
+
+                    <div class="certificate-card">
+                        <svg class="certificate-badge-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm0 7c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm0-18c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zM12 21c-4.962 0-9-4.038-9-9s4.038-9 9-9 9 4.038 9 9-4.038 9-9 9z"/>
+                        </svg>
+                        <h3 class="certificate-title">TensorFlow Developer</h3>
+                        <p class="certificate-issuer">Google</p>
+                        <div class="certificate-date">2023</div>
+                    </div>
+                    
                 </div>
             </div>
 
-            <div class="resume-section">
-                <h2 class="section-title">Certificates</h2>
-                <div class="resume-item">
-                    <h3>Machine Learning Specialization</h3>
-                    <div class="date">2024</div>
-                    <p>Completed comprehensive course on machine learning algorithms and applications.</p>
-                </div>
-                <div class="resume-item">
-                    <h3>Python Programming</h3>
-                    <div class="date">2023</div>
-                    <p>Advanced Python programming certification covering data structures and algorithms.</p>
-                </div>
-                <div class="resume-item">
-                    <h3>Web Development Bootcamp</h3>
-                    <div class="date">2023</div>
-                    <p>Full-stack web development training including React, Node.js, and database management.</p>
-                </div>
-            </div>
 
             <div style="text-align: center;">
                 <a href="#" class="download-btn" onclick="downloadResume()">
@@ -640,26 +908,26 @@
             </div>
         </div>
 
-        <!-- Projects Page -->
         <div id="projects" class="page">
             <div class="resume-section">
-                <h2 class="section-title">My Projects</h2>
-                <div class="filter-buttons">
+                <h2 class="section-title">Projects</h2>
+
+                <div class="filter-buttons" style="margin-bottom:1rem;">
                     <button class="filter-btn active" onclick="filterProjects('all')">All</button>
-                    <button class="filter-btn" onclick="filterProjects('ml')">Machine Learning</button>
-                    <button class="filter-btn" onclick="filterProjects('web')">Web Development</button>
+                    <button class="filter-btn" onclick="filterProjects('ml')">ML</button>   
+                    <button class="filter-btn" onclick="filterProjects('dl')">DL</button>
                     <button class="filter-btn" onclick="filterProjects('other')">Other</button>
                 </div>
+
                 <div id="projects-container" class="projects-grid">
-                    <div class="loading">Loading projects from GitHub...</div>
+                    <p class="loading">Loading projects...</p>
                 </div>
             </div>
         </div>
 
-        <!-- Contact Page -->
         <div id="contact" class="page">
             <div class="resume-section">
-                <h2 class="section-title">Get In Touch</h2>
+                <h2 class="section-title">📞 Get In Touch</h2>
                 <div class="contact-container">
                     <div class="contact-form-section">
                         <h3 style="color: #a78bfa; margin-bottom: 2rem;">Send a Message</h3>
@@ -724,6 +992,12 @@
                                     <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                     </svg>
+                                    GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/nishu-tiwari-0428b9336" target="_blank" class="social-btn">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                    </svg>
                                     LinkedIn
                                 </a>
                             </div>
@@ -754,39 +1028,71 @@
             // Show selected page
             document.getElementById(pageId).classList.add('active');
             
-            // Add active class to clicked nav link
-            event.target.classList.add('active');
+            // Add active class to clicked nav link.
+            const targetLink = event.target.closest('a');
+            if(targetLink) {
+                targetLink.classList.add('active');
+            }
             
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Fetch GitHub Repositories
+        // Fetch GitHub Repositories (includes README image when available)
         async function fetchGitHubRepos() {
             const container = document.getElementById('projects-container');
+            const owner = 'nishu-1202';
             try {
-                const response = await fetch('https://api.github.com/users/nishu-1202/repos?sort=updated&per_page=9');
+                const response = await fetch(`https://api.github.com/users/${owner}/repos?sort=updated&per_page=9`);
                 const repos = await response.json();
-                
-                if (repos.length === 0) {
+
+                if (!repos || repos.length === 0) {
                     container.innerHTML = '<p class="loading">No repositories found.</p>';
                     return;
                 }
 
-                container.innerHTML = repos.map(repo => {
+                // For each repo, attempt to fetch README and extract first image
+                const cards = await Promise.all(repos.map(async repo => {
                     // Determine project category based on language or name
                     let category = 'other';
                     const language = (repo.language || '').toLowerCase();
                     const name = repo.name.toLowerCase();
-                    
+
                     if (language.includes('python') || name.includes('ml') || name.includes('ai') || name.includes('neural')) {
                         category = 'ml';
                     } else if (language.includes('javascript') || language.includes('html') || language.includes('css') || name.includes('web')) {
                         category = 'web';
                     }
 
+                    let imageUrl = '';
+                    try {
+                        const readmeUrl = `https://raw.githubusercontent.com/${owner}/${repo.name}/${repo.default_branch}/README.md`;
+                        const r = await fetch(readmeUrl);
+                        if (r.ok) {
+                            const md = await r.text();
+                            const imgMatch = md.match(/!\[[^\]]*\]\(([^)]+)\)/i);
+                            if (imgMatch && imgMatch[1]) {
+                                let url = imgMatch[1].trim();
+                                // Handle relative paths in README (convert to raw.githubusercontent)
+                                if (!/^https?:\/\//i.test(url)) {
+                                    url = url.replace(/^\.\//, '');
+                                    url = url.replace(/^\//, '');
+                                    url = `https://raw.githubusercontent.com/${owner}/${repo.name}/${repo.default_branch}/${url}`;
+                                }
+                                imageUrl = url;
+                            }
+                        }
+                    } catch (e) {
+                        console.error('README fetch error for', repo.name, e);
+                    }
+
+                    return { repo, category, imageUrl };
+                }));
+
+                container.innerHTML = cards.map(({ repo, category, imageUrl }) => {
                     return `
                         <div class="project-card" data-category="${category}">
+                            ${imageUrl ? `<img src="${imageUrl}" alt="${repo.name}" class="project-image"/>` : ''}
                             <div class="project-name">${repo.name}</div>
                             <p class="project-description">
                                 ${repo.description || 'No description available'}
@@ -853,18 +1159,33 @@
         // Load projects when page loads
         window.addEventListener('DOMContentLoaded', () => {
             fetchGitHubRepos();
+            // This is needed for the initial load to correctly show the 'about' page's active nav link
+            const initialPage = window.location.hash.substring(1) || 'about';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href').substring(1) === initialPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
         });
 
         // Handle browser back/forward buttons
         window.addEventListener('popstate', function(e) {
             const hash = window.location.hash.substring(1) || 'about';
-            showPage(hash);
+            // Find the correct nav link and trigger the showPage logic
+            const link = document.querySelector(`.nav-link[href="#${hash}"]`);
+            if (link) {
+                // Manually call showPage and pass a dummy event object
+                showPage(hash, { target: link });
+            }
         });
     </script>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>© 2024 Nishu Tiwari. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
-</html>GitHub
-                                </a>
-                                <a href="https://www.linkedin.com/in/nishu-tiwari-0428b9336" target="_blank" class="social-btn">
-                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                                    </svg>
+</html>
