@@ -92,6 +92,178 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes progressFill {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* About Page Animations */
+        #about .hero {
+            opacity: 0;
+            animation: floatIn 0.6s ease forwards;
+        }
+
+        #about .hero-left {
+            opacity: 0;
+            animation: slideInLeft 0.6s ease 0.2s forwards;
+        }
+
+        #about .hero-right {
+            opacity: 0;
+            animation: slideInRight 0.6s ease 0.2s forwards;
+        }
+
+        #about .about-bullets li {
+            opacity: 0;
+            animation: slideInRight 0.5s ease forwards;
+        }
+
+        #about .about-bullets li:nth-child(1) { animation-delay: 0.3s; }
+        #about .about-bullets li:nth-child(2) { animation-delay: 0.4s; }
+        #about .about-bullets li:nth-child(3) { animation-delay: 0.5s; }
+        #about .about-bullets li:nth-child(4) { animation-delay: 0.6s; }
+
+        #about .achievement-card {
+            opacity: 0;
+            animation: scaleIn 0.5s ease forwards;
+        }
+
+        #about .achievement-card:nth-child(1) { animation-delay: 0.4s; }
+        #about .achievement-card:nth-child(2) { animation-delay: 0.5s; }
+        #about .achievement-card:nth-child(3) { animation-delay: 0.6s; }
+
+        #about .expertise-section {
+            opacity: 0;
+            animation: slideInRight 0.6s ease 0.3s forwards;
+        }
+
+        #about .contact-meta {
+            opacity: 0;
+            animation: slideInRight 0.6s ease 0.4s forwards;
+        }
+
+        /* Projects Page Animations */
+        #projects .filter-buttons {
+            opacity: 0;
+            animation: floatIn 0.5s ease 0.1s forwards;
+        }
+
+        #projects .project-card {
+            opacity: 0;
+            animation: scaleIn 0.5s ease forwards;
+        }
+
+        #projects .project-card:nth-child(1) { animation-delay: 0.2s; }
+        #projects .project-card:nth-child(2) { animation-delay: 0.3s; }
+        #projects .project-card:nth-child(3) { animation-delay: 0.4s; }
+        #projects .project-card:nth-child(4) { animation-delay: 0.5s; }
+        #projects .project-card:nth-child(5) { animation-delay: 0.6s; }
+        #projects .project-card:nth-child(6) { animation-delay: 0.7s; }
+
+        /* Contact Page Animations */
+        #contact .contact-form-section {
+            opacity: 0;
+            animation: slideInLeft 0.6s ease 0.1s forwards;
+        }
+
+        #contact .contact-info-section {
+            opacity: 0;
+            animation: slideInRight 0.6s ease 0.1s forwards;
+        }
+
+        #contact .contact-item {
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        #contact .contact-item:nth-child(1) { animation-delay: 0.3s; }
+        #contact .contact-item:nth-child(2) { animation-delay: 0.4s; }
+        #contact .contact-item:nth-child(3) { animation-delay: 0.5s; }
+
+        #contact .social-links {
+            opacity: 0;
+            animation: fadeIn 0.5s ease 0.6s forwards;
+        }
+
+        #contact .map-container {
+            opacity: 0;
+            animation: scaleIn 0.6s ease 0.7s forwards;
+        }
+
+        /* Level Bar Animation */
+        .level-fill {
+            animation: progressFill 1s ease-out forwards;
+        }
+
+        /* Resume animations */
+        #resume .resume-section {
+            opacity: 0;
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        #resume .resume-section:nth-child(odd) {
+            animation-name: slideInLeft;
+        }
+
+        #resume .resume-item {
+            opacity: 0;
+            animation: scaleIn 0.5s ease forwards;
+        }
+
+        #resume .resume-section:nth-child(1) { animation-delay: 0.1s; }
+        #resume .resume-section:nth-child(2) { animation-delay: 0.2s; }
+        #resume .resume-section:nth-child(3) { animation-delay: 0.3s; }
+        #resume .resume-section:nth-child(4) { animation-delay: 0.4s; }
+
+        #resume .resume-item:nth-child(1) { animation-delay: 0.3s; }
+        #resume .resume-item:nth-child(2) { animation-delay: 0.4s; }
+        #resume .resume-item:nth-child(3) { animation-delay: 0.5s; }
+        #resume .resume-item:nth-child(4) { animation-delay: 0.6s; }
+
+        #resume .skill-category-card {
+            opacity: 0;
+            animation: scaleIn 0.5s ease forwards;
+        }
+
+        #resume .skill-category-card:nth-child(1) { animation-delay: 0.4s; }
+        #resume .skill-category-card:nth-child(2) { animation-delay: 0.5s; }
+        #resume .skill-category-card:nth-child(3) { animation-delay: 0.6s; }
+        #resume .skill-category-card:nth-child(4) { animation-delay: 0.7s; }
+
+        #resume .certificate-card {
+            opacity: 0;
+            animation: scaleIn 0.5s ease forwards;
+        }
+
+        #resume .certificate-card:nth-child(1) { animation-delay: 0.5s; }
+        #resume .certificate-card:nth-child(2) { animation-delay: 0.6s; }
+        #resume .certificate-card:nth-child(3) { animation-delay: 0.7s; }
+
+        #resume .download-btn {
+            opacity: 0;
+            animation: fadeIn 0.5s ease 0.8s forwards;
+        }
+
         /* About Page */
         .hero {
             background: rgba(30, 30, 60, 0.6);
@@ -1314,7 +1486,25 @@
 
             <div class="resume-section">
                 <h2 class="section-title"> 🛠️ Technical Skills</h2>
-                <div class="skills-grid-container">
+                <!-- Inline scoped styles: make resume skill cards rectangular and 2-per-row -->
+                <style>
+                    /* rectangle cards: wider than tall (4:3) */
+                    #resume .skills-grid-container.inline-rect { grid-template-columns: repeat(2, 1fr) !important; gap: 1.5rem !important; }
+                    #resume .skills-grid-container.inline-rect .skill-category-card {
+                        /* slightly less wide rectangles (shorter length) */
+                        aspect-ratio: 0 / 4;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        padding: 1.25rem;
+                        min-height: auto;
+                    }
+                    @media (max-width:800px) {
+                        #resume .skills-grid-container.inline-rect { grid-template-columns: 1fr !important; }
+                        #resume .skills-grid-container.inline-rect .skill-category-card { aspect-ratio: auto; }
+                    }
+                </style>
+                <div class="skills-grid-container inline-rect" style="grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
                     
                     <div class="skill-category-card">
                         <h3 class="category-header">
@@ -1358,9 +1548,7 @@
                         <div class="skill-tag-container">
                             <span class="skill-tag">Git</span>
                             <span class="skill-tag">GitHub</span>
-                            <span class="skill-tag">UV</span>
                             <span class="skill-tag">FastAPI</span>
-                            <span class="skill-tag">SQL</span>
                             <span class="skill-tag">VS Code</span>
                         </div>
                     </div>
