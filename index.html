@@ -1478,234 +1478,6 @@
         }
 
     </style>
-
-    <script>
-// Icon Injection System
-(function() {
-    const iconCache = new Map();
-    const THEME_COLOR = '#a78bfa';
-    const ICON_SIZE = 80;
-    const SVG_VIEW_SIZE = 56;
-
-    function slugify(str) {
-        return String(str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    }
-
-    async function fetchSvg(url) {
-        try {
-            const res = await fetch(url, {cache: "force-cache"});
-            if (!res.ok) return null;
-            const text = await res.text();
-            const svgText = text
-                .replace(/fill="[^"]*"/g, 'fill="currentColor"')
-                .replace(/stroke="[^"]*"/g, 'stroke="currentColor"');
-            return svgText;
-        } catch (e) {
-            return null;
-        }
-    }
-
-    async function fetchIconSVG(keyword) {
-        if (!keyword) return null;
-        const key = keyword.toLowerCase();
-        if (iconCache.has(key)) return iconCache.get(key);
-
-        const slug = slugify(keyword);
-
-        // Try SimpleIcons CDN
-        const simpleIconsUrl = `https://cdn.simpleicons.org/${slug}`;
-        let svg = await fetchSvg(simpleIconsUrl);
-        if (svg) {
-            iconCache.set(key, svg);
-            return svg;
-        }
-
-        // Try DiceBear
-        const dicebear = `https://api.dicebear.com/6.x/identicon/svg?seed=${encodeURIComponent(keyword)}&scale=100`;
-        svg = await fetchSvg(dicebear);
-        if (svg) {
-            iconCache.set(key, svg);
-            return svg;
-        }
-
-        iconCache.set(key, null);
-        return null;
-    }
-
-    async function injectIconToCard(card, repoName) {
-        if (!card) return;
-        if (card.dataset.iconInjected === '1') return;
-
-        const existingWrappers = card.querySelectorAll('.repo-icon-wrapper');
-        existingWrappers.forEach(w => w.remove());
-
-        const firstToken = (repoName || '').split(/[-_\s]/)[0] || repoName || 'proj';
-        const svgText = await fetchIconSVG(firstToken);
-
-        let iconNode;
-        if (svgText) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'repo-icon-wrapper';
-            wrapper.style.flex = `0 0 ${ICON_SIZE}px`;
-            wrapper.style.width = `${ICON_SIZE}px`;
-            wrapper.style.height = `${ICON_SIZE}px`;
-            wrapper.style.display = 'flex';
-            wrapper.style.alignItems = 'center';
-            wrapper.style.justifyContent = 'center';
-            wrapper.style.borderRadius = '12px';
-            wrapper.style.background = 'linear-gradient(180deg, rgba(167,139,250,0.06), rgba(118,75,162,0.04))';
-            wrapper.style.border = '1px solid rgba(255,255,255,0.04)';
-            wrapper.style.boxShadow = '0 8px 20px rgba(0,0,0,0.35)';
-            wrapper.style.color = THEME_COLOR;
-            wrapper.style.overflow = 'hidden';
-            wrapper.style.minWidth = `${ICON_SIZE}px`;
-            wrapper.style.minHeight = `${ICON_SIZE}px`;
-
-            wrapper.innerHTML = svgText;
-            const svgEl = wrapper.querySelector('svg');
-            if (svgEl) {
-                svgEl.setAttribute('width', String(SVG_VIEW_SIZE));
-                svgEl.setAttribute('height', String(SVG_VIEW_SIZE));
-                svgEl.style.display = 'block';
-            }
-            iconNode = wrapper;
-        } else {
-            const fallback = document.createElement('div');
-            fallback.className = 'repo-icon-wrapper';
-            fallback.style.width = fallback.style.height = `${ICON_SIZE}px`;
-            fallback.style.borderRadius = '12px';
-            fallback.style.background = THEME_COLOR;
-            fallback.style.display = 'flex';
-            fallback.style.alignItems = 'center';
-            fallback.style.justifyContent = 'center';
-            fallback.style.color = '#111';
-            fallback.style.fontWeight = '700';
-            fallback.style.fontSize = `${Math.floor(ICON_SIZE * 0.44)}px`;
-            fallback.textContent = (firstToken || 'P').charAt(0).toUpperCase();
-            iconNode = fallback;
-        }
-
-        const row = document.createElement('div');
-        row.style.display = 'flex';
-        row.style.alignItems = 'center';
-        row.style.gap = '16px';
-        row.style.marginBottom = '12px';
-        row.style.flexWrap = 'nowrap';
-        row.style.justifyContent = 'flex-start';
-
-        const content = document.createElement('div');
-        content.style.flex = '1 1 auto';
-        content.style.minWidth = '0';
-
-        const nodesToMove = [];
-        Array.from(card.children).forEach(child => {
-            if (child.classList && child.classList.contains('project-image')) return;
-            if (child.classList && child.classList.contains('repo-icon-wrapper')) return;
-            nodesToMove.push(child);
-        });
-
-        nodesToMove.forEach(n => content.appendChild(n));
-
-        row.appendChild(iconNode);
-        row.appendChild(content);
-
-        const img = card.querySelector('.project-image');
-        if (img && img.nextSibling) {
-            card.insertBefore(row, img.nextSibling);
-        } else if (img) {
-            card.appendChild(row);
-        } else {
-            card.insertBefore(row, card.firstChild);
-        }
-
-        const title = card.querySelector('.project-name');
-        if (title) {
-            title.style.margin = '0';
-            title.style.fontSize = '1.25rem';
-            title.style.color = '#a78bfa';
-            title.style.fontWeight = '700';
-            title.style.overflow = 'hidden';
-            title.style.textOverflow = 'ellipsis';
-            title.style.whiteSpace = 'nowrap';
-        }
-
-        card.dataset.iconInjected = '1';
-    }
-
-    window.injectIconToCard = injectIconToCard;
-
-    // Observer for GitHub repos
-    const reposContainer = document.getElementById('github-repos-container');
-    if (reposContainer) {
-        const observer = new MutationObserver(mutations => {
-            for (const m of mutations) {
-                for (const node of m.addedNodes) {
-                    if (!(node instanceof HTMLElement)) continue;
-                    const cards = node.matches('.project-card') ? [node] : Array.from(node.querySelectorAll?.('.project-card') || []);
-                    cards.forEach(async card => {
-                        if (card.dataset.iconInjected === '1') return;
-                        
-                        const nameEl = card.querySelector('.project-name');
-                        const repoName = nameEl ? nameEl.textContent.trim() : (card.dataset.repoName || card.getAttribute('data-name') || '');
-                        await injectIconToCard(card, repoName);
-                    });
-                }
-            }
-        });
-        observer.observe(reposContainer, { childList: true, subtree: true });
-    }
-})();
-
-// Fetch GitHub Repositories
-async function fetchGitHubRepos() {
-    const username = 'nishu-1202';
-    const container = document.getElementById('github-repos-container');
-    
-    try {
-        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
-        const repos = await response.json();
-        
-        if (repos.length === 0) {
-            container.innerHTML = '<p style="color: #a78bfa; text-align: center;">No repositories found.</p>';
-            return;
-        }
-        
-        container.innerHTML = '';
-        
-        repos.forEach(repo => {
-            const card = document.createElement('div');
-            card.className = 'project-card';
-            card.dataset.language = (repo.language || 'other').toLowerCase();
-            
-            card.innerHTML = `
-                <div class="project-name">${repo.name}</div>
-                <div class="project-description">${repo.description || 'No description available'}</div>
-                <div class="project-tags">
-                    ${repo.language ? `<span class="tag">${repo.language}</span>` : ''}
-                    <span class="tag">⭐ ${repo.stargazers_count}</span>
-                    <span class="tag">🍴 ${repo.forks_count}</span>
-                </div>
-                <a href="${repo.html_url}" target="_blank" class="project-link">View on GitHub →</a>
-            `;
-            
-            container.appendChild(card);
-        });
-        
-    } catch (error) {
-        console.error('Error fetching GitHub repos:', error);
-        container.innerHTML = '<p style="color: #ff6b6b; text-align: center;">Failed to load repositories.</p>';
-    }
-}
-
-// Filter GitHub repos by language
-function filterGitHubRepos(language) {
-    const cards = document.querySelectorAll('#github-repos-container .project-card');
-    cards.forEach(card => {
-        card.style.display = 'block'; // Show all cards
-    });
-}
-</script>
-
 </head>
 <body>
     <nav>
@@ -2211,15 +1983,21 @@ function filterGitHubRepos(language) {
             </div>
         </div>
 
+
         <!-- MY WORK PAGE - Auto fetches from GitHub -->
         <div id="mywork" class="page">
             <div class="resume-section">
                 <h2 class="section-title">📚 My Work - GitHub Repositories</h2>
+                
+                
+
                 <div id="github-repos-container" class="projects-grid">
                     <div class="loading">Loading repositories from GitHub...</div>
                 </div>
             </div>
         </div>
+
+    
 
         <div id="contact" class="page">
             <div class="resume-section">
@@ -2376,10 +2154,9 @@ function filterGitHubRepos(language) {
             });
         });
 
-            // Load projects when page loads
+        // Load projects when page loads
         window.addEventListener('DOMContentLoaded', () => {
-            renderProjects();
-    fetchGitHubRepos();
+            fetchGitHubRepos();
             // This is needed for the initial load to correctly show the 'about' page's active nav link
             const initialPage = window.location.hash.substring(1) || 'about';
             document.querySelectorAll('.nav-link').forEach(link => {
@@ -2395,7 +2172,7 @@ function filterGitHubRepos(language) {
         window.addEventListener('popstate', function(e) {
             const hash = window.location.hash.substring(1) || 'about';
             // Find the correct nav link and trigger the showPage logic
-            const link = document.querySelector(`.nav-link[hreaf="#${hash}"]`);
+            const link = document.querySelector(`.nav-link[href="#${hash}"]`);
             if (link) {
                 // Manually call showPage and pass a dummy event object
                 showPage(hash, { target: link });
@@ -2446,7 +2223,70 @@ function filterGitHubRepos(language) {
                 }
             });
         })();
+
+        // Fetch GitHub Repositories
+        async function fetchGitHubRepos() {
+            const username = 'nishu-1202';
+            const container = document.getElementById('github-repos-container');
+            
+            try {
+                const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+                const repos = await response.json();
+                
+                if (repos.length === 0) {
+                    container.innerHTML = '<p style="color: #a78bfa; text-align: center;">No repositories found.</p>';
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                repos.forEach(repo => {
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    card.dataset.language = (repo.language || 'other').toLowerCase();
+                    
+                    card.innerHTML = `
+                        <div class="project-name">${repo.name}</div>
+                        <div class="project-description">${repo.description || 'No description available'}</div>
+                        <div class="project-tags">
+                            ${repo.language ? `<span class="tag">${repo.language}</span>` : ''}
+                            <span class="tag">⭐ ${repo.stargazers_count}</span>
+                            <span class="tag">🍴 ${repo.forks_count}</span>
+                        </div>
+                        <a href="${repo.html_url}" target="_blank" class="project-link">View on GitHub →</a>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+                
+            } catch (error) {
+                console.error('Error fetching GitHub repos:', error);
+                container.innerHTML = '<p style="color: #ff6b6b; text-align: center;">Failed to load repositories.</p>';
+            }
+        }
+
+        // Filter GitHub repos by language
+        function filterGitHubRepos(language) {
+            const cards = document.querySelectorAll('#github-repos-container .project-card');
+            const buttons = document.querySelectorAll('#mywork .filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                const cardLang = card.dataset.language;
+                if (language === 'all' || cardLang === language) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
     </script>
+   
+        
+
+   </script>
 
     <footer>
         <div class="footer-bottom">
