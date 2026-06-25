@@ -255,8 +255,8 @@ const CONFIG_PROJECTS = [
         cover: 'MNIST-Autoencoder-Visualization.png',
         icon: 'fas fa-chart-line',
         category: 'Deep Learning',
-        github: 'https://github.com/raj-neelam/MNIST-Autoencoder-Visualization',
-        demo: 'https://raj-neelam.github.io/MNIST-Autoencoder-Visualization/',
+        github: 'https://github.com/nishu-tiwari82/MNIST-Autoencoder-Visualization',
+        demo: null,
         description: 'A very simple MNIST-Digit autoencoder for 2D Latent Space Visualization along with the Model Training Code and visualization Website Code ',
     },
     {
