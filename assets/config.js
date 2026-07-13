@@ -13,7 +13,7 @@ const CONFIG_PERSONAL = {
     location: 'Roorkee, India',
     birthday: 'Feb 12, 2004',
     email: 'nishutiwari1202@gmail.com',
-    phone: '+91 9621643182',
+    phone: '+91 ##########',
     website: 'https://nishutiwari.me',
     avatar: './assets/images/profile-avatar.jpg',
     // Roles cycled in the typewriter — add/remove freely
@@ -75,12 +75,12 @@ const CONFIG_EDUCATION = [
     },
     {
         date: '2021 — 2023',
-        title: 'DAV Dhanupura, Ara',
+        title: 'GOVT SCHOOL',
         body: 'Intermediate — Science stream',
     },
     {
         date: '2018 — 2021',
-        title: 'DAV Pusauli, Kaimur',
+        title: 'GOVT SCHOOL',
         body: 'Matriculation',
     },
 ];
